@@ -1,0 +1,35 @@
+@startuml  the first programming 
+
+    rectangle "App para academia"{
+       
+        actor Usuario as user
+        actor Aluno as aluno
+        actor Personal as personal
+        
+        user <|-- personal
+        user <|-- aluno
+
+        usecase "Efetuar Login" as login
+        usecase "Log Off" as logoff
+        usecase "Visualizar Perfil\n- Alterar Dados" as visualizarPerfil
+        usecase "Realizar Treino\n- Exibir Exercícios" as realizarTreino
+        usecase "Visualizar Desempenho\n- Exibir Gráfico\n- Histórico" as visualizarDesempenho
+        usecase "Visualizar IMC\n- Inserir Medidas" as visualizarIMC
+        usecase "Agendar Aula\n- Confirmar Aulas Disponíveis" as agendarAula
+        usecase "Cadastrar Treino\n- Alterar Treino\n- Excluir Treino\n- Agendar Aulas" as gerenciarTreinos
+
+        user --> login
+        user --> logoff
+        user --> visualizarPerfil
+        aluno --> realizarTreino
+        aluno --> visualizarDesempenho
+        aluno --left-> (visualizarIMC)
+        aluno --> agendarAula
+        personal --> gerenciarTreinos
+
+        
+    }
+
+
+@enduml
+
