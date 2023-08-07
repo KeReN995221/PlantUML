@@ -11,23 +11,46 @@
 
         usecase "Efetuar Login" as login
         usecase "Log Off" as logoff
-        usecase "Visualizar Perfil\n- Alterar Dados" as visualizarPerfil
-        usecase "Realizar Treino\n- Exibir Exercícios" as realizarTreino
-        usecase "Visualizar Desempenho\n- Exibir Gráfico\n- Histórico" as visualizarDesempenho
-        usecase "Visualizar IMC\n- Inserir Medidas" as visualizarIMC
-        usecase "Agendar Aula\n- Confirmar Aulas Disponíveis" as agendarAula
-        usecase "Cadastrar Treino\n- Alterar Treino\n- Excluir Treino\n- Agendar Aulas" as gerenciarTreinos
+        usecase "Visualizar Perfil" as visualizarPerfil
+        usecase " Alterar Dados" as alterarDados
+        usecase "visualizar ficha de treino" as visualizarFicha
+
+        usecase "Visualizar Treinos" as realizarTreino
+        usecase "Exibir Exercícios" as verExercicios
+        usecase "Visualizar Desempenho " as visualizarDesempenho
+        usecase "Exibir Gráfico" as exibeGrafico
+        usecase "Exibir Histórico" as exibeHistorico
+        usecase "Visualizar IMC" as visualizarIMC
+        usecase "Inserir Medidas" as insereMedidas
+
+        
+        usecase "Ficha de Treino" as gerenciarTreinos
+        usecase "Alterar Treino" as alterarTreino
+        usecase "Excluir Treino" as excluirTreino
+        usecase "cadastrar Treino" as cadastrarTreino
+
 
         user --> login
         user --> logoff
-        user --> visualizarPerfil
-        aluno --> realizarTreino
-        aluno --> visualizarDesempenho
-        aluno --left-> (visualizarIMC)
-        aluno --> agendarAula
-        personal --> gerenciarTreinos
+        user --> visualizarFicha
+        user--> visualizarPerfil
+        (visualizarPerfil) .> (alterarDados): <<include>>
 
-        
+
+        aluno --> realizarTreino
+        (realizarTreino) .> (verExercicios): <<include>>
+        aluno --> visualizarDesempenho
+        (visualizarDesempenho).> (exibeGrafico): <<include>>
+        (exibeGrafico).>(exibeHistorico): <<include>>
+        aluno --> visualizarIMC
+        (visualizarIMC).> (insereMedidas): <<include>>
+
+
+        personal --> gerenciarTreinos
+        (gerenciarTreinos).> (cadastrarTreino):  <<include>>
+        (gerenciarTreinos).> (excluirTreino):  <<include>>
+        (gerenciarTreinos).> (alterarTreino):  <<include>> 
+      
     }
 
 
